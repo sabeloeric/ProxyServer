@@ -21,6 +21,19 @@ app.get('/proxy', (req, res) => {
   });
 });
 
+app.get('/proxy/google/', (req, res) => {
+  const url = "https://maps.googleapis.com/maps/api" + req.query.url;
+
+  request(url, (error, response, body) => {
+    if (!error && response.statusCode === 200) {
+      res.send(body);
+    } else {
+      res.status(500).send('Error fetching data');
+    }
+  });
+});
+
+
 app.get('/places', (req, res) => {
   const query = req.query.query;
   const apiKey = req.query.apiKey;
