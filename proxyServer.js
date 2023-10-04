@@ -57,7 +57,7 @@ app.get('/place/nearbysearch/json', (req, res) => {
   });
 });
 
-app.get('/place/details', (req, res) => {
+app.get('/place/details/json', (req, res) => {
   const placeid = req.query.placeid;
   const apiKey = req.query.key;
 
