@@ -72,6 +72,22 @@ app.get('/place/details/json', (req, res) => {
   });
 });
 
+app.get('/place/autocomplete/json', (req, res) => {
+  const input = req.query.input;
+  const location = req.query.location;
+  const radius = req.query.radius;
+  const apiKey = req.query.key; // Get the API key from the query parameter
+
+  const url = `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${input}&location=${location}&radius=${radius}&key=${apiKey}`;
+
+  request(url, (error, response, body) => {
+    if (!error && response.statusCode === 200) {
+      res.send(body);
+    } else {
+      res.status(500).send('Error fetching data');
+    }
+  });
+});
 
 
 app.get('/places', (req, res) => {
