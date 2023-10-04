@@ -41,12 +41,12 @@ app.get('/proxy/google/', (req, res) => {
   });
 });
 
-app.get('/place/nearbysearch', (req, res) => {
-  const query = req.query.json;
+app.get('/place/nearbysearch/json', (req, res) => {
+  const location = req.query.location;
+  const radius = req.query.radius;
+  const apiKey = req.query.key; 
 
-  const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?${query}`;
-
-  print({url});
+  const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${location}&radius=${radius}&key=${apiKey}`;
 
   request(url, (error, response, body) => {
     if (!error && response.statusCode === 200) {
@@ -55,7 +55,7 @@ app.get('/place/nearbysearch', (req, res) => {
       res.status(500).send('Error fetching data');
     }
   });
-})
+});
 
 
 app.get('/places', (req, res) => {
